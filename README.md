@@ -1,4 +1,4 @@
-ansible-role-oracle-common
+oracle-common
 =========
 
 Ansible role to setup common Oracle stuff.
@@ -9,7 +9,7 @@ Ansible role to setup common Oracle stuff.
 Requirements
 ------------
 
-No requirements yet.
+Ansible 1.2
 
 Role Variables
 --------------
@@ -62,7 +62,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: Nosmoht.ansible-role-oracle-common }
+         - { role: oracle-common }
 
 License
 -------

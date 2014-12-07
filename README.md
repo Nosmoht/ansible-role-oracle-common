@@ -15,7 +15,7 @@ Role Variables
 --------------
 
 Variable | Default | Meaning | Hints
---- | --- | ---
+:--- | --- | --- | :---
 oracle_app_directory | /u01/app | Base directory under which Oracle products will be installed |
 oracle_inventory_group_name |  oinstall | Name of Oracle Inventory owner group |
 oracle_inventory_group_id | 54321 | GID of Oracle Inventory owner group |

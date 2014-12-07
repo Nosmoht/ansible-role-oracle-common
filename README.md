@@ -32,26 +32,22 @@ oracle_db_osdgdba_group_name | dgdba | Name of DB group OSDGDBA (new in 12c) | O
 oracle_db_osdgdba_group_id | 54325 | GID of DB group OSDGDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
 oracle_db_oskmdba_group_name | kmdba | Name of DB group OSKMDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
 oracle_db_oskmdba_group_id | 54326 | GID of DB group OSKMDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
-
 oracle_db_owner_user_name | oracle | Name of Oracle Database Software owner |
 oracle_db_owner_user_id | 54321 | UID of Oracle Database Software owner |
 oracle_db_owner_user_home | /home/oracle | Home directory of the Oracle Database Software owner |
 oracle_db_owner_user_shell | /bin/bash | Shell used by the Oracle Database Software owner |
 oracle_db_oracle_base | '{{oracle_app_directory}}/{{ oracle_db_owner_user_name }}' | ORACLE_BASE of Oracle Database
-
 oracle_gi_osdba_group_name | asmdba | Name of GI group OSDBA | Only used is Grid Infrastructure is installed and oracle_role_separation is set to True
 oracle_gi_osdba_group_id | 54327 | GID of GI group OSDBA | Only used is Grid Infrastructure is installed and oracle_role_separation is set to True
 oracle_gi_osoper_group_name | asmoper | Name of GI group OSOPER | Only used is Grid Infrastructure is installed and oracle_role_separation is set to True
 oracle_gi_osoper_group_id | 54328 | GID of GI group OSOPER | Only used is Grid Infrastructure is installed and oracle_role_separation is set to True
 oracle_gi_osasm_group_name | asmadmin | Name of GI group OSASM | Only used is Grid Infrastructure is installed and oracle_role_separation is set to True
 oracle_gi_osasm_group_id | 54329 | GID of GI group OSASM | Only used is Grid Infrastructure is installed and oracle_role_separation is set to True
-
 oracle_gi_owner_user_name | grid | Name of Oracle Grid Infrastructure Software owner | Only used is Grid Infrastructure is installed
 oracle_gi_owner_user_id | 54322 | UID of Oracle Grid Infrastructure Software owner | Only used is Grid Infrastructure is installed
 oracle_gi_owner_user_home | /home/grid | Home directory of Oracle Grid Infrastructure owner | Only used is Grid Infrastructure is installed
 oracle_gi_owner_user_shell| /bin/bash | Shell used by Oracle Grid Infrastructure owner | Only used is Grid Infrastructure is installed
 oracle_gi_oracle_base | '{{ oracle_app_directory }}/{{ oracle_gi_owner_user_name }}' | ORACLE_BASE of Grid Infrastructure  | Only used is Grid Infrastructure is installed
-
 oracle_shells | - | Variable containing typical shells and associated profile files | DON'T CHANGE IT
 
 Dependencies

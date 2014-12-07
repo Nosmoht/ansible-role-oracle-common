@@ -58,7 +58,7 @@ No dependencies.
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Without defining any variable the following playbook would just create the group oinstall as well as user oracle.
 
     - hosts: servers
       roles:

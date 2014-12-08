@@ -6,7 +6,7 @@
     state: present
 
 - name: Creating Oracle Grid Infrastructure groups
-  group: 
+  group:
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
@@ -17,10 +17,10 @@
     gid: '{{ oracle_gi_osoper_group_id }}'
   - name: '{{ oracle_gi_osasm_group_name }}'
     gid: '{{ oracle_gi_osasm_group_id }}'
-  when: oracle_gi_homes is defined
+  when: oracle_role_separation|bool and oracle_gi_homes is defined
 
 - name: Creating Oracle Database groups
-  group: 
+  group:
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
@@ -32,16 +32,21 @@
   when: oracle_role_separation|bool and oracle_db_homes is defined
 
 - name: Setting default value for fact oracle_db_homes_12c
-  set_fact: oracle_db_homes_12c=false
+  set_fact:
+    oracle_db_homes_12c: false
+  when: oracle_db_homes is defined
 
 - name: Checking if Oracle 12c has to be installed
   set_fact:
     oracle_db_homes_12c: true
-  when: item.version[:2] == "12"
+  when: oracle_db_homes is defined
   with_items: oracle_db_homes
 
 - name: Creating Oracle Database groups (12c)
-  group: name={{ item.name }} gid={{ item.gid }} state=present
+  group:
+    name: '{{ item.name }}'
+    gid: '{{ item.gid }}'
+    state: present
   with_items:
   - name: '{{ oracle_db_osbackupdba_group_name }}'
     gid: '{{ oracle_db_osbackupdba_group_id }}'
@@ -49,4 +54,4 @@
     gid: '{{ oracle_db_osdgdba_group_id }}'
   - name: '{{ oracle_db_oskmdba_group_name }}'
     gid: '{{ oracle_db_oskmdba_group_id }}'
-  when: oracle_role_separation|bool and oracle_db_homes is defined and oracle_db_homes_12c
+  when: oracle_role_separation|bool and oracle_db_homes is defined and oracle_db_homes_12c|bool

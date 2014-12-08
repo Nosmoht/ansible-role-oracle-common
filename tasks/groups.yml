@@ -39,8 +39,8 @@
 - name: Checking if Oracle 12c has to be installed
   set_fact:
     oracle_db_homes_12c: true
-  when: oracle_db_homes is defined
-  with_items: oracle_db_homes
+  when: oracle_db_homes is defined and item.value.version[:2] == "12"
+  with_dict: oracle_db_homes
 
 - name: Creating Oracle Database groups (12c)
   group:

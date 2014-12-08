@@ -6,7 +6,8 @@
     state: present
 
 - name: Creating Oracle Grid Infrastructure groups
-  group: '{{ item.name }}'
+  group: 
+    name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
   with_items:
@@ -19,7 +20,8 @@
   when: oracle_gi_homes is defined
 
 - name: Creating Oracle Database groups
-  group: '{{ item.name }}'
+  group: 
+    name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
   with_items:

@@ -1,7 +1,10 @@
 ---
 - include: groups.yml
+  tags: groups
 
 - include: users.yml
+  tags: users
 
 - include: inventory.yml
   when: oracle_client_homes is defined or oracle_gi_homes_is defined or oracle_db_homes is defined
+  tags: inventory

@@ -1,29 +1,39 @@
 ---
 - name: Adding Oracle Inventory group to Database Owner groups
-  set_fact: oracle_db_owner_groups="{{ oracle_inventory_group_name }}"
+  set_fact:
+    oracle_db_owner_groups: '{{ oracle_inventory_group_name }}'
 
 - name: Adding Oracle Grid Infrastructure groups to Database Owner groups
-  set_fact: oracle_db_owner_groups="{{ oracle_db_owner_groups }},{{ oracle_gi_osdba_group_name }}"
+  set_fact:
+    oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_gi_osdba_group_name }}'
   when: oracle_gi_homes is defined
 
 - name: Adding Oracle Database groups to Database Owner groups
-  set_fact: oracle_db_owner_groups="{{ oracle_db_owner_groups }},{{ oracle_db_osdba_group_name }},{{ oracle_db_osoper_group_name }}"
+  set_fact:
+    oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_db_osdba_group_name }},{{ oracle_db_osoper_group_name }}'
+  when: oracle_role_separation|bool
 
 - name: Adding Oracle Database 12c groups to Database Owner groups
-  set_fact: oracle_db_owner_groups="{{ oracle_db_owner_groups }},{{ oracle_db_osbackupdba_group_name}},{{ oracle_db_osdgdba_group_name}},{{ oracle_db_oskmdba_group_name}}"
-  when: oracle_db_homes_12c
+  set_fact:
+    oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_db_osbackupdba_group_name}},{{
+      oracle_db_osdgdba_group_name}},{{ oracle_db_oskmdba_group_name}}'
+  when: oracle_role_separation|bool and oracle_db_homes_12c
 
 - name: Creating Oracle Database owner
   user:
-    name: "{{ oracle_db_owner_user_name }}"
-    uid: "{{ oracle_db_owner_user_id }}"
+    name: '{{ oracle_db_owner_user_name }}'
+    uid: '{{ oracle_db_owner_user_id }}'
+    group: '{{ oracle_inventory_group_name }}'
+    groups: '{{ oracle_db_owner_groups }}'
+    shell: '{{ oracle_db_owner_user_shell }}'
+    home: '{{ oracle_db_owner_user_home }}'
     state: present
-    group: "{{ oracle_inventory_group_name }}"
-    groups: "{{ oracle_db_owner_groups }}"
-    shell: "{{ oracle_db_owner_user_shell }}"
-    home: "{{ oracle_db_owner_user_home }}"
 
 - name: Configuring umask for Database owner
-  lineinfile: dest={{ oracle_db_owner_user_home }}/{{ item.file }} regexp="^#?umask" line="umask 022" state=present
-  when: oracle_db_owner_user_shell == "{{ item.path }}"
+  lineinfile: 
+    dest: '{{ oracle_db_owner_user_home }}/{{ item.file }}'
+    regexp: '^#?umask'
+    line: 'umask 022'
+    state: present
+  when: oracle_db_owner_user_shell == '{{ item.path }}'
   with_items: oracle_shells

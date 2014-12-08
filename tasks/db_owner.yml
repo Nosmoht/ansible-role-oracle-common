@@ -1,7 +1,7 @@
 ---
-- name: Adding Oracle Inventory group to Database Owner groups
+- name: Setting Oracle Database owner additional groups to empty
   set_fact:
-    oracle_db_owner_groups: '{{ oracle_inventory_group_name }}'
+    oracle_db_owner_groups: ''
 
 - name: Adding Oracle Grid Infrastructure groups to Database Owner groups
   set_fact:

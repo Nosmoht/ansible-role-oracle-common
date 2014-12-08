@@ -3,4 +3,3 @@
   when: oracle_gi_homes is defined
 
 - include: db_owner.yml
-  when: oracle_db_homes is defined

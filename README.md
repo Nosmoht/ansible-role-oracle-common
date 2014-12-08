@@ -48,6 +48,7 @@ oracle_gi_owner_user_id | 54322 | UID of Oracle Grid Infrastructure Software own
 oracle_gi_owner_user_home | /home/grid | Home directory of Oracle Grid Infrastructure owner | Only used is Grid Infrastructure is installed
 oracle_gi_owner_user_shell| /bin/bash | Shell used by Oracle Grid Infrastructure owner | Only used is Grid Infrastructure is installed
 oracle_gi_oracle_base | '{{ oracle_app_directory }}/{{ oracle_gi_owner_user_name }}' | ORACLE_BASE of Grid Infrastructure  | Only used is Grid Infrastructure is installed
+oracle_role_separation | True | Determines if role separation is activated or not |
 oracle_shells | - | Variable containing typical shells and associated profile files | DON'T CHANGE IT
 
 Dependencies

@@ -1,5 +1,6 @@
 ---
 oracle_app_directory: /u01/app
+
 oracle_inventory_group_name: oinstall
 oracle_inventory_group_id: 54321
 oracle_inventory_directory: '{{ oracle_app_directory }}/oraInventory'
@@ -20,7 +21,7 @@ oracle_db_owner_user_name: oracle
 oracle_db_owner_user_id: 54321
 oracle_db_owner_user_home: /home/oracle
 oracle_db_owner_user_shell: /bin/bash
-oracle_db_oracle_base: "{{oracle_app_directory}}/{{ oracle_db_owner_user_name }}"
+oracle_db_oracle_base: '{{oracle_app_directory}}/{{ oracle_db_owner_user_name }}'
 
 oracle_gi_osdba_group_name: asmdba
 oracle_gi_osdba_group_id: 54327
@@ -28,12 +29,13 @@ oracle_gi_osoper_group_name: asmoper
 oracle_gi_osoper_group_id: 54328
 oracle_gi_osasm_group_name: asmadmin
 oracle_gi_osasm_group_id: 54329
-
 oracle_gi_owner_user_name: grid
 oracle_gi_owner_user_id: 54322
 oracle_gi_owner_user_home: /home/grid
 oracle_gi_owner_user_shell: /bin/bash
-oracle_gi_oracle_base: "{{ oracle_app_directory }}/{{ oracle_gi_owner_user_name }}"
+oracle_gi_oracle_base: '{{ oracle_app_directory }}/{{ oracle_gi_owner_user_name }}'
+
+oracle_role_separation: true
 
 oracle_shells:
 - path: /bin/bash

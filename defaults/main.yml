@@ -6,6 +6,11 @@ oracle_inventory_group_id: 54321
 oracle_inventory_directory: '{{ oracle_app_directory }}/oraInventory'
 oracle_inventory_file: '{{ oracle_inventory_directory }}/ContentsXML/inventory.xml'
 
+oracle_tns_admin: '{{ oracle_app_directory }}/network/admin'
+oracle_listener_ora_file: '{{ oracle_tns_admin }}/listener.ora'
+oracle_tns_names_file: '{{ oracle_tns_admin }}/tnsnames.ora'
+oracle_sqlnet_ora_file: '{{ oracle_tns_admin }}/sqlnet.ora'
+
 oracle_db_osdba_group_name: dba
 oracle_db_osdba_group_id: 54322
 oracle_db_osoper_group_name: oper

@@ -1,0 +1,16 @@
+---
+- name: Ensure TNS_ADMIN directory
+  file:
+    path: '{{ oracle_tns_admin }}'
+    state: directory
+    owner: '{{ oracle_db_owner_user_name }}'
+    group: '{{ oracle_inventory_group_name }}'
+    mode: '0755'
+
+- name: Ensure content of tnsnames.ora
+  template:
+    dest: '{{ oracle_tnsnames_ora_file }}'
+    src: '{{ oracle_tnsnames_ora_src_file }}'
+    owner: '{{ oracle_db_owner_user_name }}'
+    group: '{{ oracle_inventory_group_name }}'
+    mode: '0644'

@@ -8,3 +8,7 @@
 - include: inventory.yml
   when: oracle_client_homes is defined or oracle_gi_homes is defined or oracle_db_homes is defined
   tags: inventory
+
+- include: tns.yml
+  when: oracle_tns_names is defined
+  tags: tns

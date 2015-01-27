@@ -7,10 +7,10 @@
     group: '{{ oracle_inventory_group_name }}'
     mode: '0660'
 
-- name: Ensuring right permissions of OraInventory directory
+- name: Ensuring right permissions of Oracle Inventory directory
   file:
     name: '{{ oracle_inventory_directory }}'
     owner: '{{oracle_db_owner_user_name }}'
     group: '{{ oracle_inventory_group_name }}'
-    mode: '0775'
+    mode: '0750'
     state: directory

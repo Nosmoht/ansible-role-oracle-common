@@ -1,11 +1,11 @@
 ---
-- name: Creating Oracle Inventory group
+- name: Ensure inventory group
   group:
     name: '{{ oracle_inventory_group_name }}'
     gid: '{{ oracle_inventory_group_id }}'
     state: present
 
-- name: Creating Oracle Grid Infrastructure groups
+- name: Ensure Grid Infrastructure groups
   group:
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
@@ -19,7 +19,7 @@
     gid: '{{ oracle_gi_osasm_group_id }}'
   when: oracle_role_separation|bool and oracle_gi_homes is defined
 
-- name: Creating Oracle Database groups
+- name: Ensure Database groups
   group:
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
@@ -33,14 +33,15 @@
 
 - name: Setting default value for fact oracle_db_homes_12c
   set_fact:
-    oracle_db_homes_12c: false
+#    oracle_db_homes_12c: false
+    oracle_db_homes_12c: oracle_db_homes is defined and item.value.version[:2] == "12" #
   when: oracle_db_homes is defined
 
-- name: Checking if Oracle 12c has to be installed
-  set_fact:
-    oracle_db_homes_12c: true
-  when: oracle_db_homes is defined and item.value.version[:2] == "12"
-  with_dict: oracle_db_homes
+#- name: Checking if Oracle 12c has to be installed
+#  set_fact:
+#    oracle_db_homes_12c: true
+#  when: oracle_db_homes is defined and item.value.version[:2] == "12"
+#  with_dict: oracle_db_homes
 
 - name: Creating Oracle Database groups (12c)
   group:

@@ -7,7 +7,7 @@
     group: '{{ oracle_inventory_group_name }}'
     mode: '0755'
 
-- name: Ensure content of tnsnames.ora
+- name: Ensure tnsnames.ora
   template:
     dest: '{{ oracle_tnsnames_ora_file }}'
     src: '{{ oracle_tnsnames_ora_src_file }}'

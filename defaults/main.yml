@@ -6,7 +6,7 @@ oracle_inventory_group_id: 54321
 oracle_inventory_directory: '{{ oracle_app_directory }}/oraInventory'
 oracle_inventory_file: '{{ oracle_inventory_directory }}/ContentsXML/inventory.xml'
 
-oracle_tns_admin: '{{ oracle_app_directory }}/network/admin'
+oracle_tns_admin: '{{ oracle_app_directory }}/{{ oracle_db_owner_user_name }}/network/admin'
 oracle_listener_ora_file: '{{ oracle_tns_admin }}/listener.ora'
 oracle_sqlnet_ora_file: '{{ oracle_tns_admin }}/sqlnet.ora'
 oracle_tnsnames_ora_file: '{{ oracle_tns_admin }}/tnsnames.ora'
@@ -54,3 +54,5 @@ oracle_shells:
   file: .login
 - path: /bin/tcsh
   file: .login
+
+oracle_db_homes_12c: false

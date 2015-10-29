@@ -1,21 +1,21 @@
 {% for entry in oracle_tns_names -%}
 {{ entry.name }} =
   (DESCRIPTION =
-    {% if entry.hosts is defined -%}
+    {% if entry.load_balance is defined -%}
+    (LOAD_BALANCE = {{ entry.load_balance }})
+    {% endif -%}
+    {% if entry.failover is defined -%}
+    (FAILOVER = {{ entry.failover }})
+    {% endif -%}
+    {% if entry.hosts| default([ansible_fqdn]) | length > 1 %}
     (ADDRESS_LIST =
-    {% endif -%}
-      {% if entry.load_balance is defined -%}
-      (LOAD_BALANCE = {{ entry.load_balance }})
-      {% endif -%}
-      {% if entry.failover is defined -%}
-      (FAILOVER = {{ entry.failover }})
-      {% endif -%}
-      {% for host in entry.hosts | default([ansible_fqdn]) -%}
-      (ADDRESS = (PROTOCOL = {{ entry.protocol | default('TCP')}})(HOST = {{ host | default(ansible_fqdn) }})(PORT = {{ entry.port | default(1521) }}))
-      {% endfor -%}
-    {% if entry.hosts is defined -%}
+    {% endif %}
+    {% for host in entry.hosts | default([ansible_fqdn]) -%}
+    (ADDRESS = (PROTOCOL = {{ entry.protocol | default('TCP')}})(HOST = {{ host | default(ansible_fqdn) }})(PORT = {{ entry.port | default(1521) }}))
+    {% endfor -%}
+    {% if entry.hosts| default([ansible_fqdn]) | length > 1 %}
     )
-    {% endif -%}
+    {% endif %}
     (CONNECT_DATA =
       (SERVER = {{ entry.server | default('DEDICATED')}})
       {% if entry.service_name is defined -%}

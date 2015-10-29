@@ -1,13 +1,7 @@
 ---
 - name: Setting Oracle Database owner additional groups to empty
   set_fact:
-#    oracle_db_owner_groups: ''
     oracle_db_owner_groups: '{% if oracle_gi_homes is defined %}{{ oracle_db_owner_groups }},{{ oracle_gi_osdba_group_name }}{% endif %}'
-
-#- name: Adding Oracle Grid Infrastructure groups to Database Owner groups
-#  set_fact:
-#    oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_gi_osdba_group_name }}'
-#  when: oracle_gi_homes is defined
 
 - name: Adding Oracle Database groups to Database Owner groups
   set_fact:

@@ -1,8 +1,9 @@
 ---
-- name: Creating Oracle Grid Infrastructure owner
+# TODO: handle oracle_role_separation
+- name: Ensure Grid Infrastructure owner
   user:
     name: '{{ oracle_gi_owner_user_name }}'
     uid: '{{ oracle_gi_owner_user_id }}'
-    state: present
     group: '{{ oracle_inventory_group_name }}'
     groups: '{{ oracle_gi_osdba_group_name }},{{ oracle_gi_osoper_group_name }},{{ oracle_gi_osasm_group_name }},{{ oracle_db_osdba_group_name }}'
+    state: present

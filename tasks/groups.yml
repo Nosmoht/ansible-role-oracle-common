@@ -33,8 +33,8 @@
 
 - name: Setting default value for fact oracle_db_homes_12c
   set_fact:
-    oracle_db_homes_12c:  '{{ oracle_db_homes_12c or item.value.version[:2] == "12" }}'
-  with_dict: oracle_db_homes
+    oracle_db_homes_12c:  '{{ oracle_db_homes_12c or item.version[:2] == "12" }}'
+  with_items: oracle_db_homes
 
 - name: Creating Oracle Database groups (12c)
   group:

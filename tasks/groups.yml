@@ -10,13 +10,7 @@
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
-  with_items:
-  - name: '{{ oracle_gi_osdba_group_name }}'
-    gid: '{{ oracle_gi_osdba_group_id }}'
-  - name: '{{ oracle_gi_osoper_group_name }}'
-    gid: '{{ oracle_gi_osoper_group_id }}'
-  - name: '{{ oracle_gi_osasm_group_name }}'
-    gid: '{{ oracle_gi_osasm_group_id }}'
+  with_items: oracle_gi_os_groups
   when: oracle_role_separation|bool and oracle_gi_homes is defined
 
 - name: Ensure Database groups
@@ -24,28 +18,19 @@
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
-  with_items:
-  - name: '{{ oracle_db_osdba_group_name }}'
-    gid: '{{ oracle_db_osdba_group_id }}'
-  - name: '{{ oracle_db_osoper_group_name }}'
-    gid: '{{ oracle_db_osoper_group_id }}'
+  with_items: oracle_db_os_groups
   when: oracle_role_separation|bool and oracle_db_homes is defined
 
 - name: Setting default value for fact oracle_db_homes_12c
   set_fact:
     oracle_db_homes_12c:  '{{ oracle_db_homes_12c or item.version[:2] == "12" }}'
+  when: oracle_db_homes is defined
   with_items: oracle_db_homes
 
-- name: Creating Oracle Database groups (12c)
+- name: Ensure Oracle Database groups (12c)
   group:
     name: '{{ item.name }}'
     gid: '{{ item.gid }}'
     state: present
-  with_items:
-  - name: '{{ oracle_db_osbackupdba_group_name }}'
-    gid: '{{ oracle_db_osbackupdba_group_id }}'
-  - name: '{{ oracle_db_osdgdba_group_name }}'
-    gid: '{{ oracle_db_osdgdba_group_id }}'
-  - name: '{{ oracle_db_oskmdba_group_name }}'
-    gid: '{{ oracle_db_oskmdba_group_id }}'
-  when: oracle_role_separation|bool and oracle_db_homes is defined and oracle_db_homes_12c|bool
+  with_items: oracle_db_os_groups_12c
+  when: oracle_role_separation|bool and oracle_db_homes_12c|bool

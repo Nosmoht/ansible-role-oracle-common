@@ -23,6 +23,20 @@ oracle_db_osdgdba_group_id: 54325
 oracle_db_oskmdba_group_name: kmdba
 oracle_db_oskmdba_group_id: 54326
 
+oracle_db_os_groups:
+- name: '{{ oracle_db_osdba_group_name }}'
+  gid: '{{ oracle_db_osdba_group_id }}'
+- name: '{{ oracle_db_osoper_group_name }}'
+  gid: '{{ oracle_db_osoper_group_id }}'
+
+oracle_db_os_groups_12c:
+- name: '{{ oracle_db_osbackupdba_group_name }}'
+  gid: '{{ oracle_db_osbackupdba_group_id }}'
+- name: '{{ oracle_db_osdgdba_group_name }}'
+  gid: '{{ oracle_db_osdgdba_group_id }}'
+- name: '{{ oracle_db_oskmdba_group_name }}'
+  gid: '{{ oracle_db_oskmdba_group_id }}'
+
 oracle_db_owner_user_name: oracle
 oracle_db_owner_user_id: 54321
 oracle_db_owner_user_home: /home/oracle
@@ -40,6 +54,14 @@ oracle_gi_owner_user_id: 54322
 oracle_gi_owner_user_home: /home/grid
 oracle_gi_owner_user_shell: /bin/bash
 oracle_gi_oracle_base: '{{ oracle_app_directory }}/{{ oracle_gi_owner_user_name }}'
+
+oracle_gi_os_groups:
+- name: '{{ oracle_gi_osdba_group_name }}'
+  gid: '{{ oracle_gi_osdba_group_id }}'
+- name: '{{ oracle_gi_osoper_group_name }}'
+  gid: '{{ oracle_gi_osoper_group_id }}'
+- name: '{{ oracle_gi_osasm_group_name }}'
+  gid: '{{ oracle_gi_osasm_group_id }}'
 
 oracle_role_separation: true
 

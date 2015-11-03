@@ -3,14 +3,14 @@
   template:
     src: oraInst.loc.j2
     dest: /etc/oraInst.loc
-    owner: '{{oracle_db_owner_user_name }}'
+    owner: '{{ oracle_db_owner_user_name }}'
     group: '{{ oracle_inventory_group_name }}'
     mode: '0664'
 
 - name: Ensure Oracle Inventory
   file:
     name: '{{ oracle_inventory_directory }}'
-    owner: '{{oracle_db_owner_user_name }}'
+    owner: '{{ oracle_db_owner_user_name }}'
     group: '{{ oracle_inventory_group_name }}'
     mode: '0750'
     state: directory

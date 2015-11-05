@@ -40,6 +40,7 @@ The role was tested on RHEL 6+7, CentOS 6+7 and Oracle Linux 6+7 installing Orac
 ## Groups
 ### Database groups
 Following variables are only used if __oracle_role_separation__ it true.
+
 | Name | Default | Description |
 |:-----|:--------|:------------|
 | oracle_db_osdba_group_name | dba | Name of DB group OSDBA |

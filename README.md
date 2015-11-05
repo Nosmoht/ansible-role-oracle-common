@@ -26,7 +26,7 @@ Each group is defined by several variables that can be changed via group or host
 
 # Variables
 ## Common
-| Name | Default | Description | Hints |
+| Name | Default | Description |
 |:---------|:--------|:------------|:------|
 | oracle_app_directory | /u01/app | Base directory under which Oracle products will be installed |
 | oracle_inventory_group_name |  oinstall | Name of Oracle Inventory owner group |
@@ -34,7 +34,6 @@ Each group is defined by several variables that can be changed via group or host
 | oracle_inventory_directory | '{{ oracle_app_directory }}/oraInventory' | Directory where the Oracle Inventory will be stored |
 | oracle_inventory_file | '{{ oracle_inventory_directory }}/ContentsXML/inventory.xml' | Path to file containing the Oracle inventory |
 | oracle_role_separation | True | Enable or disable role separation |
-| oracle_shells | - | Variable containing typical shells and associated profile files | DON'T CHANGE IT |
 
 ## Groups
 ### Database groups

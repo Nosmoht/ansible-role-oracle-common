@@ -2,10 +2,10 @@
 {{ entry.name }} =
   (DESCRIPTION =
     {% if entry.load_balance is defined -%}
-    (LOAD_BALANCE = {{ entry.load_balance }})
+    (LOAD_BALANCE = {% if entry.load_balance %}YES{% else %}NO{% endif %})
     {% endif -%}
     {% if entry.failover is defined -%}
-    (FAILOVER = {{ entry.failover }})
+    (FAILOVER = {% if entry.failover %}YES{% else %}NO{% endif %})
     {% endif -%}
     {% if entry.hosts| default([ansible_fqdn]) | length > 1 %}
     (ADDRESS_LIST =

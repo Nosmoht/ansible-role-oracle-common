@@ -21,6 +21,8 @@ Each group is defined by several variables that can be changed via group or host
 - permissions and content of Oracle Inventory
 - TNS_ADMIN directory and conent of tnsnames.ora if __oracle_tns_names__ is defined
 
+The role was tested on RHEL 6+7, CentOS 6+7 and Oracle Linux 6+7 installing Oracle 11gR2 and Oracle 12cR2.
+
 # Requirements
 - Ansible 1.9
 
@@ -37,18 +39,19 @@ Each group is defined by several variables that can be changed via group or host
 
 ## Groups
 ### Database groups
-| Name | Default | Description | Hints |
-|:---------|:--------|:------------|:------|
-| oracle_db_osdba_group_name | dba | Name of DB group OSDBA | Only used if oracle_role_separation is set to True
-| oracle_db_osdba_group_id | 54322 | GID of DB group OSDBA | Only used if oracle_role_separation is set to True
-| oracle_db_osoper_group_name | oper | Name of DB group OSOPER | Only used if oracle_role_separation is set to True
-| oracle_db_osoper_group_id | 54323 | GID of DB group OSOPER | Only used if oracle_role_separation is set to True
-| oracle_db_osbackupdba_group_name |  backupdba | Name of DB group OSBACKUPDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
-| oracle_db_osbackupdba_group_id | 54324 | GID of DB group OSBACKUPDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
-| oracle_db_osdgdba_group_name | dgdba | Name of DB group OSDGDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
-| oracle_db_osdgdba_group_id | 54325 | GID of DB group OSDGDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
-| oracle_db_oskmdba_group_name | kmdba | Name of DB group OSKMDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
-| oracle_db_oskmdba_group_id | 54326 | GID of DB group OSKMDBA (new in 12c) | Only used if oracle_role_separation is set to True and an Oracle 12c DB is installed
+Following variables are only used if __oracle_role_separation__ it true.
+| Name | Default | Description |
+|:-----|:--------|:------------|
+| oracle_db_osdba_group_name | dba | Name of DB group OSDBA |
+| oracle_db_osdba_group_id | 54322 | GID of DB group OSDBA |
+| oracle_db_osoper_group_name | oper | Name of DB group OSOPER |
+| oracle_db_osoper_group_id | 54323 | GID of DB group OSOPER |
+| oracle_db_osbackupdba_group_name |  backupdba | Name of DB group OSBACKUPDBA (new in 12c) |
+| oracle_db_osbackupdba_group_id | 54324 | GID of DB group OSBACKUPDBA (new in 12c) |
+| oracle_db_osdgdba_group_name | dgdba | Name of DB group OSDGDBA (new in 12c) |
+| oracle_db_osdgdba_group_id | 54325 | GID of DB group OSDGDBA (new in 12c) |
+| oracle_db_oskmdba_group_name | kmdba | Name of DB group OSKMDBA (new in 12c) |
+| oracle_db_oskmdba_group_id | 54326 | GID of DB group OSKMDBA (new in 12c) |
 
 ### Grid Infrastructure groups
 | Variable | Default | Description | Hints |

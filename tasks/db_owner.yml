@@ -6,7 +6,7 @@
 - name: Adding Oracle Database groups to Database Owner groups
   set_fact:
     oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_db_osdba_group_name }},{{ oracle_db_osoper_group_name }}'
-  when: oracle_role_separation|bool and oracle_db_homes is defined
+  when: oracle_role_separation|bool and oracle_db_home is defined
 
 - name: Adding Oracle Database 12c groups to Database Owner groups
   set_fact:

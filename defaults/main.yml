@@ -12,6 +12,11 @@ oracle_sqlnet_ora_file: '{{ oracle_tns_admin }}/sqlnet.ora'
 oracle_tnsnames_ora_file: '{{ oracle_tns_admin }}/tnsnames.ora'
 oracle_tnsnames_ora_src_file: tnsnames.ora.j2
 
+oracle_setup_db_os_groups: false
+oracle_setup_db12c_os_groups: false
+oracle_setup_gi_os_groups: false
+oracle_role_separation: true
+
 oracle_db_osdba_group_name: dba
 oracle_db_osdba_group_id: 54322
 oracle_db_osoper_group_name: oper
@@ -62,8 +67,6 @@ oracle_gi_os_groups:
   gid: '{{ oracle_gi_osoper_group_id }}'
 - name: '{{ oracle_gi_osasm_group_name }}'
   gid: '{{ oracle_gi_osasm_group_id }}'
-
-oracle_role_separation: true
 
 oracle_shells:
 - path: /bin/bash

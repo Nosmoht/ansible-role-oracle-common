@@ -32,3 +32,11 @@
     state: present
   when: oracle_db_owner_user_shell == '{{ item.path }}'
   with_items: oracle_shells
+
+- name: Ensure database owner profile
+  template:
+    src: oracle.sh.j2
+    dest: /etc/profile.d/oracle.sh
+    owner: root
+    group: root
+    mode: '0644'

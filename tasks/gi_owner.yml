@@ -7,3 +7,11 @@
     group: '{{ oracle_inventory_group_name }}'
     groups: '{{ oracle_gi_osdba_group_name }},{{ oracle_gi_osoper_group_name }},{{ oracle_gi_osasm_group_name }},{{ oracle_db_osdba_group_name }}'
     state: present
+
+- name: Ensure Grid Infrastructure owner profile
+  template:
+    src: grid.sh.j2
+    dest: /etc/profile.d/grid.sh
+    owner: root
+    group: root
+    mode: '0644'

@@ -6,7 +6,6 @@
   tags: oracle_users
 
 - include: inventory.yml
-  when: oracle_client_homes is defined or oracle_gi_homes is defined or oracle_db_homes is defined
   tags: oracle_inventory
 
 - include: tns.yml

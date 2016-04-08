@@ -1,0 +1,53 @@
+---
+- name: Ensure group
+  group:
+    name: '{{ item.name }}'
+    gid: '{{ item.gid }}'
+    state: present
+  with_items:
+  - name: '{{ oracle_inventory_group_name }}'
+    gid: '{{ oracle_inventory_group_id }}'
+  - '{% if oracle_role_separation | bool and oracle_setup_db_os_groups | bool %}{{ oracle_db_os_groups }}{% else %}[]{% endif %}'
+  - '{% if oracle_role_separation | bool and oracle_setup_db12c_os_groups | bool %}{{ oracle_db_os_groups_12c }}{% else %}[]{% endif %}'
+
+- name: Setting Oracle Database owner additional groups
+  set_fact:
+    oracle_db_owner_groups: '{% if oracle_grid_homes is defined %}{{ oracle_db_owner_groups }},{{ oracle_grid_osdba_group_name }}{% endif %}'
+  when:
+
+- name: Adding Oracle Database groups to Database Owner groups
+  set_fact:
+    oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_db_osdba_group_name }},{{ oracle_db_osoper_group_name }}'
+  when: '{{ oracle_role_separation|bool }} and {{ oracle_setup_db_os_groups }}'
+
+- name: Adding Oracle Database 12c groups to Database Owner groups
+  set_fact:
+    oracle_db_owner_groups: '{{ oracle_db_owner_groups }},{{ oracle_db_osbackupdba_group_name}},{{ oracle_db_osdgdba_group_name}},{{ oracle_db_oskmdba_group_name}}'
+  when: '{{ oracle_role_separation | bool }} and {{ oracle_setup_db12c_os_groups }}'
+
+- name: Ensure user
+  user:
+    name: '{{ oracle_db_owner_user_name }}'
+    uid: '{{ oracle_db_owner_user_id }}'
+    group: '{{ oracle_inventory_group_name }}'
+    groups: '{{ oracle_db_owner_groups }},{{ oracle_db_owner_additional_groups | join(",") }}'
+    shell: '{{ oracle_db_owner_user_shell }}'
+    home: '{{ oracle_db_owner_user_home }}'
+    state: present
+
+- name: Ensure umask of database owner
+  lineinfile:
+    dest: '{{ oracle_db_owner_user_home }}/{{ item.file }}'
+    regexp: '^#?umask'
+    line: 'umask 022'
+    state: present
+  when: oracle_db_owner_user_shell == '{{ item.path }}'
+  with_items: '{{ oracle_shells }}'
+
+- name: Ensure database owner profile
+  template:
+    src: oracle.sh.j2
+    dest: /etc/profile.d/oracle.sh
+    owner: root
+    group: root
+    mode: '0644'

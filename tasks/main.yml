@@ -1,13 +1,6 @@
 ---
-- include: groups.yml
-  tags: oracle_groups
+- include: install.yml
+  tags: oracle_common_install
 
-- include: users.yml
-  tags: oracle_users
-
-- include: inventory.yml
-  when: oracle_client_homes is defined or oracle_gi_homes is defined or oracle_db_homes is defined
-  tags: oracle_inventory
-
-- include: tns.yml
-  tags: oracle_tns
+- include: config.yml
+  tags: oracle_common_config

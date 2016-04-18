@@ -13,6 +13,7 @@
     owner: root
     group: root
     mode: '0644'
+  when: '{{ oracle_setup_inventory | default(false) }}'
 
 - name: Ensure Oracle Inventory
   file:
@@ -21,3 +22,4 @@
     group: '{{ oracle_inventory_group_name }}'
     mode: '{{ oracle_inventory_directory_mode }}'
     state: directory
+  when: '{{ oracle_setup_inventory | default(false) }}'

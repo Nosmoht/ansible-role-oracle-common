@@ -34,20 +34,3 @@
     shell: '{{ oracle_db_owner_user_shell }}'
     home: '{{ oracle_db_owner_user_home }}'
     state: present
-
-- name: Ensure umask of database owner
-  lineinfile:
-    dest: '{{ oracle_db_owner_user_home }}/{{ item.file }}'
-    regexp: '^#?umask'
-    line: 'umask 022'
-    state: present
-  when: oracle_db_owner_user_shell == '{{ item.path }}'
-  with_items: '{{ oracle_shells }}'
-
-- name: Ensure database owner profile
-  template:
-    src: oracle.sh.j2
-    dest: /etc/profile.d/oracle.sh
-    owner: root
-    group: root
-    mode: '0644'

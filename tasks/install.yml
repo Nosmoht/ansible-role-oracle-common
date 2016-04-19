@@ -34,3 +34,11 @@
     shell: '{{ oracle_db_owner_user_shell }}'
     home: '{{ oracle_db_owner_user_home }}'
     state: present
+
+- name: Ensure user authorized_keys
+  authorized_key:
+    exclusive: yes
+    user: '{{ oracle_db_owner_user_name }}'
+    state: present
+    key: '{{ oracle_db_owner_user_authorized_keys }}'
+  when: oracle_db_owner_user_authorized_keys is defined
